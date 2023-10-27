@@ -23,7 +23,7 @@ def teardown(error):
 
 @app.errorhandler(404)
 def not_found(error):
-    """Custom 404 error
+    """Customs 404 error
     """
     return jsonify({'error': 'Not found'}), 404
 

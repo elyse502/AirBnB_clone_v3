@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Define routes for blueprint
+"""Define routes for blueprint.
 """
 
 from api.v1.views import app_views

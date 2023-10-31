@@ -962,25 +962,101 @@ Creates a `Review`: `POST /api/v1/places/<place_id>/reviews`
 * If the HTTP body request is not valid JSON, raise a `400` error with the message `Not a JSON`
 * If the dictionary doesn’t contain the key `user_id`, raise a `400` error with the message `Missing user_id`
 * If the `user_id` is not linked to any `User` object, raise a `404` error
-* If the dictionary doesn’t contain the key `text`, raise a `400` error with the message Missing text
+* If the dictionary doesn’t contain the key `text`, raise a `400` error with the message `Missing text`
 * Returns the new `Review` with the status code `201`
 
 Updates a `Review` object: `PUT /api/v1/reviews/<review_id>`
-* If the `review_id` is not linked to any Review object, raise a `404` error
-* You must use request.get_json from Flask to transform the HTTP request to a dictionary
-* If the HTTP request body is not valid JSON, raise a 400 error with the message `Not a JSON`
-* Update the Review object with all key-value pairs of the dictionary
+* If the `review_id` is not linked to any `Review` object, raise a `404` error
+* You must use `request.get_json` from Flask to transform the HTTP request to a dictionary
+* If the HTTP request body is not valid JSON, raise a `400` error with the message `Not a JSON`
+* Update the `Review` object with all key-value pairs of the dictionary
 * Ignore keys: `id`, `user_id`, `place_id`, `created_at` and `updated_at`
 * Returns the `Review` object with the status code `200`
 
+## 12. HTTP access control (CORS): [api/v1/app.py](https://github.com/elyse502/AirBnB_clone_v3/blob/master/api/v1/app.py)
+A resource makes a cross-origin HTTP request when it requests a resource from a different domain, or port, than the one the first resource itself serves.
 
+Read the full definition [here](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
 
+Why do we need this?
 
+Because you will soon start allowing a web client to make requests your API. If your API doesn’t have a correct CORS setup, your web client won’t be able to access your data.
 
+With Flask, it’s really easy, you will use the class `CORS` of the module `flask_cors`.
 
+How to install it: `$ pip3 install flask_cors`
 
+Update `api/v1/app.py` to create a `CORS` instance allowing: `/*` for `0.0.0.0`
 
+You will update it later when you will deploy your API to production.
 
+Now you can see this HTTP Response Header: `< Access-Control-Allow-Origin: 0.0.0.0`
+```groovy
+guillaume@ubuntu:~/AirBnB_v3$ curl -X GET http://0.0.0.0:5000/api/v1/cities/1da255c0-f023-4779-8134-2b1b40f87683 -vvv
+*   Trying 0.0.0.0...
+* TCP_NODELAY set
+* Connected to 0.0.0.0 (127.0.0.1) port 5000 (#0)
+> GET /api/v1/states/2b9a4627-8a9e-4f32-a752-9a84fa7f4efd/cities/1da255c0-f023-4779-8134-2b1b40f87683 HTTP/1.1
+> Host: 0.0.0.0:5000
+> User-Agent: curl/7.51.0
+> Accept: */*
+> 
+* HTTP 1.0, assume close after body
+< HTTP/1.0 200 OK
+< Content-Type: application/json
+< Access-Control-Allow-Origin: 0.0.0.0
+< Content-Length: 236
+< Server: Werkzeug/0.12.1 Python/3.4.3
+< Date: Sun, 16 Apr 2017 04:20:13 GMT
+< 
+{
+  "__class__": "City", 
+  "created_at": "2017-03-25T02:17:06", 
+  "id": "1da255c0-f023-4779-8134-2b1b40f87683", 
+  "name": "New Orleans", 
+  "state_id": "2b9a4627-8a9e-4f32-a752-9a84fa7f4efd", 
+  "updated_at": "2017-03-25T02:17:06"
+}
+* Curl_http_done: called premature == 0
+* Closing connection 0
+guillaume@ubuntu:~/AirBnB_v3$
+```
+
+## 13. Place - Amenity: [api/v1/views/places_amenities.py](https://github.com/elyse502/AirBnB_clone_v3/blob/master/api/v1/views/places_amenities.py), [api/v1/views/__init__.py](https://github.com/elyse502/AirBnB_clone_v3/blob/master/api/v1/views/__init__.py)
+Create a new view for the link between `Place` objects and `Amenity` objects that handles all default RESTFul API actions:
+* In the file `api/v1/views/places_amenities.py`
+* You must use `to_dict()` to retrieve an object into a valid JSON
+* Update `api/v1/views/__init__.py` to import this new file
+* Depending of the storage:
+  * `DBStorage`: list, create and delete `Amenity` objects from `amenities` relationship
+  * `FileStorage`: list, add and remove `Amenity` ID in the list `amenity_ids` of a `Place` object
+
+Retrieves the list of all `Amenity` objects of a `Place`: `GET /api/v1/places/<place_id>/amenities`
+* If the `place_id` is not linked to any `Place` object, raise a `404` error
+
+Deletes a `Amenity` object to a `Place`: `DELETE /api/v1/places/<place_id>/amenities/<amenity_id>`
+* If the `place_id` is not linked to any `Place` object, raise a `404` error
+* If the `amenity_id` is not linked to any `Amenity` object, raise a `404` error
+* If the `Amenity` is not linked to the `Place` before the request, raise a `404` error
+* Returns an empty dictionary with the status code `200`
+
+Link a `Amenity` object to a `Place`: `POST /api/v1/places/<place_id>/amenities/<amenity_id>`
+* No HTTP body needed
+* If the `place_id` is not linked to any `Place` object, raise a `404` error
+* If the `amenity_id` is not linked to any `Amenity` object, raise a `404` error
+* If the `Amenity` is already linked to the `Place`, return the `Amenity` with the status code `200`
+* Returns the `Amenity` with the status code `201`
+
+## 14. Security improvements!: [models/base_model.py](https://github.com/elyse502/AirBnB_clone_v3/blob/master/models/base_model.py), [models/user.py](https://github.com/elyse502/AirBnB_clone_v3/blob/master/models/user.py)
+Currently, the `User` object is designed to store the user password in cleartext.
+
+It’s super bad!
+
+To avoid that, improve the User object:
+* Update the method `to_dict()` of `BaseModel` to remove the `password` key **except when it’s used** by **`FileStorage`** to save data to disk. Tips: default parameters
+* Each time a new `User` object is created or password updated, the password is hashed to a [MD5](https://docs.python.org/3.4/library/hashlib.html) value
+* In the database for `DBStorage`, the password stored is now hashed to a MD5 value
+* In the file for `FileStorage`, the password stored is now hashed to a MD5 value
 
 
 

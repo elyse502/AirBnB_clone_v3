@@ -549,11 +549,57 @@ Ok, let starts:
     * import `app_views` from `api.v1.views`
     * create a route `/status` on the object `app_views` that returns a JSON: `"status": "OK"` (see example)
 
+## 4. Some stats?: [api/v1/views/index.py](https://github.com/elyse502/AirBnB_clone_v3/blob/master/api/v1/views/index.py)
+Create an endpoint that retrieves the number of each objects by type:
+* In api/v1/views/index.py
+* Route: /api/v1/stats
+* You must use the newly added count() method from storage
+```groovy
+guillaume@ubuntu:~/AirBnB_v3$ curl -X GET http://0.0.0.0:5000/api/v1/stats
+{
+  "amenities": 47, 
+  "cities": 36, 
+  "places": 154, 
+  "reviews": 718, 
+  "states": 27, 
+  "users": 31
+}
+guillaume@ubuntu:~/AirBnB_v3$
+```
+_(No need to have a pretty rendered output, it’s a JSON, only the structure is important)_
 
+## 5. Not found: [api/v1/app.py](https://github.com/elyse502/AirBnB_clone_v3/blob/master/api/v1/app.py)
+Designers are really creative when they have to design a “404 page”, a “Not found”… [34 brilliantly designed 404 error pages](https://www.creativebloq.com/web-design/best-404-pages-812505)
 
+Today it’s different, because you won’t use HTML and CSS, but JSON!
 
-
-
+In `api/v1/app.py`, create a handler for `404` errors that returns a JSON-formatted `404` status code response. The content should be: `"error": "Not found"`
+```groovy
+guillaume@ubuntu:~/AirBnB_v3$ curl -X GET http://0.0.0.0:5000/api/v1/nop
+{
+  "error": "Not found"
+}
+guillaume@ubuntu:~/AirBnB_v3$ curl -X GET http://0.0.0.0:5000/api/v1/nop -vvv
+*   Trying 0.0.0.0...
+* TCP_NODELAY set
+* Connected to 0.0.0.0 (127.0.0.1) port 5000 (#0)
+> GET /api/v1/nop HTTP/1.1
+> Host: 0.0.0.0:5000
+> User-Agent: curl/7.51.0
+> Accept: */*
+> 
+* HTTP 1.0, assume close after body
+< HTTP/1.0 404 NOT FOUND
+< Content-Type: application/json
+< Content-Length: 27
+< Server: Werkzeug/0.12.1 Python/3.4.3
+< Date: Fri, 14 Apr 2017 23:43:24 GMT
+< 
+{
+  "error": "Not found"
+}
+guillaume@ubuntu:~/AirBnB_v3$
+```
 
 
 

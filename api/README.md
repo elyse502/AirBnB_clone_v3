@@ -57,8 +57,8 @@ Example:
 
 ## There are 6 constraints:
 ## 1. Uniform Interface
-Define the interface between client-server
-Simple and can be split in small parts
+* Define the interface between client-server
+* Simple and can be split in small parts
 
 #### HTTP verbs
 * `GET`:

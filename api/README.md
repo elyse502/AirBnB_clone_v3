@@ -734,7 +734,7 @@ Creates a `City`: `POST /api/v1/states/<state_id>/cities`
 * You must use `request.get_json` from Flask to transform the HTTP body request to a dictionary
 * If the `state_id` is not linked to any `State` object, raise a `404` error
 * If the HTTP body request is not a valid JSON, raise a `400` error with the message `Not a JSON`
-* If the dictionary doesn’t contain the key `name`, raise a 400 error with the message `Missing name`
+* If the dictionary doesn’t contain the key `name`, raise a `400` error with the message `Missing name`
 * Returns the new `City` with the status code `201`
 
 Updates a `City` object: `PUT /api/v1/cities/<city_id>`
@@ -848,8 +848,34 @@ guillaume@ubuntu:~/AirBnB_v3$ curl -X GET http://0.0.0.0:5000/api/v1/cities/b75a
 guillaume@ubuntu:~/AirBnB_v3$
 ```
 
+## 8. Amenity: [api/v1/views/amenities.py](https://github.com/elyse502/AirBnB_clone_v3/blob/master/api/v1/views/amenities.py), [api/v1/views/__init__.py](https://github.com/elyse502/AirBnB_clone_v3/blob/master/api/v1/views/__init__.py)
+Create a new view for `Amenity` objects that handles all default RESTFul API actions:
+* In the file `api/v1/views/amenities.py`
+* You must use `to_dict()` to serialize an object into valid JSON
+* Update `api/v1/views/__init__.py` to import this new file
 
+Retrieves the list of all `Amenity` objects: `GET /api/v1/amenities`
 
+Retrieves a `Amenity` object: `GET /api/v1/amenities/<amenity_id>`
+* If the `amenity_id` is not linked to any `Amenity object`, raise a `404` error
+
+Deletes a Amenity object:: `DELETE /api/v1/amenities/<amenity_id>`
+* If the `amenity_id` is not linked to any `Amenity` object, raise a `404` error
+* Returns an empty dictionary with the status code `200`
+
+Creates a `Amenity`: `POST /api/v1/amenities`
+* You must use `request.get_json` from Flask to transform the HTTP request to a dictionary
+* If the HTTP request body is not valid JSON, raise a `400` error with the message `Not a JSON`
+* If the dictionary doesn’t contain the key `name`, raise a `400` error with the message `Missing name`
+* Returns the new `Amenity` with the status code `201`
+
+Updates a `Amenity` object: `PUT /api/v1/amenities/<amenity_id>`
+* If the `amenity_id` is not linked to any `Amenity` object, raise a `404` error
+* You must use `request.get_json` from Flask to transform the HTTP request to a dictionary
+* If the HTTP request body is not valid JSON, raise a `400` error with the message `Not a JSON`
+* Update the `Amenity` object with all key-value pairs of the dictionary
+* Ignore keys: `id`, `created_at` and `updated_at`
+* Returns the `Amenity` object with the status code `200`
 
 
 

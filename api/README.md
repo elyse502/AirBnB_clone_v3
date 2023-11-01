@@ -4,6 +4,8 @@
 
 : API with Swagger
 
+![rest-api](https://github.com/elyse502/AirBnB_clone_v3/assets/125453474/2ab63153-5cd7-4094-87d5-e8b30619b138)
+
 ## Description
 
 Project attempts to clone the the AirBnB application and website, including the

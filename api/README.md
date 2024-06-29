@@ -42,6 +42,10 @@ _For this project, we expect you to look at these concepts:_
 * [REST API](https://intranet.alxswe.com/concepts/45)
 * [AirBnB clone](https://intranet.alxswe.com/concepts/74)
 
+<br />
+<details>
+    <summary>Click to show/hide Content</summary><br />
+
 # 1. REST API
 REST API is a software architectural style for Backend.
 
@@ -121,6 +125,8 @@ Server can temporarily:
 * Transfer logic to client
 * Allow client to execute logic
 * Example: JavaScript
+
+<br /><hr /><br />
 
 # 2. AirBnB clone
 
@@ -367,6 +373,8 @@ print(date_now.strftime("%A %d %B %Y at %H:%M:%S")) # Thursday 08 June 2017 at 2
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif"><br><br>
 
+</details>
+
 # Resources🏗️
 ### Read or watch:
 * **REST API** concept page
@@ -429,6 +437,8 @@ print(date_now.strftime("%A %d %B %Y at %H:%M:%S")) # Thursday 08 June 2017 at 2
 $ pip3 install Flask
 ```
 
+<br /><hr /><br />
+
 # Tasks 📃
 ## 0. Restart from scratch!: [AirBnB_clone_v3](https://github.com/elyse502/AirBnB_clone_v3)
 No no no! We are already too far in the project to restart everything.
@@ -442,6 +452,8 @@ For this project you will fork this [codebase](https://github.com/alexaorrico/Ai
   * Add new information about your new contribution
   * Make it better!
 * If you’re the owner of this codebase, create a new repository called `AirBnB_clone_v3` and copy over all files from `AirBnB_clone_v2`
+
+---
 
 ## 1. Never fail!: [AirBnB_clone_v3](https://github.com/elyse502/AirBnB_clone_v3)
 
@@ -463,6 +475,8 @@ guillaume@ubuntu:~/AirBnB_v3$ HBNB_ENV=test HBNB_MYSQL_USER=hbnb_test HBNB_MYSQL
 OK
 guillaume@ubuntu:~/AirBnB_v3$
 ```
+
+---
 
 ## 2. Improve storage: [models/engine/db_storage.py](https://github.com/elyse502/AirBnB_clone_v3/blob/master/models/engine/db_storage.py), [models/engine/file_storage.py](https://github.com/elyse502/AirBnB_clone_v3/blob/master/models/engine/file_storage.py), [tests/test_models/test_engine/test_db_storage.py](https://github.com/elyse502/AirBnB_clone_v3/blob/master/tests/test_models/test_engine/test_db_storage.py), [tests/test_models/test_engine/test_file_storage.py](https://github.com/elyse502/AirBnB_clone_v3/blob/master/tests/test_models/test_engine/test_file_storage.py)
 Update `DBStorage` and `FileStorage`, adding two new methods. **All changes should be done in the branch** `storage_get_count`:
@@ -506,6 +520,8 @@ First state: [State] (af14c85b-172f-4474-8a30-d4ec21f9795e) {'updated_at': datet
 guillaume@ubuntu:~/AirBnB_v3$
 ```
 For this task, you **must** make a pull request on GitHub.com, and ask at least one of your peer to review and merge it.
+
+---
 
 ## 3. Status of your API: [api/__init__.py](https://github.com/elyse502/AirBnB_clone_v3/blob/master/api/__init__.py), [api/v1/__init__.py](https://github.com/elyse502/AirBnB_clone_v3/blob/master/api/v1/__init__.py), [api/v1/views/__init__.py](https://github.com/elyse502/AirBnB_clone_v3/blob/master/api/v1/views/__init__.py), [api/v1/views/index.py](https://github.com/elyse502/AirBnB_clone_v3/blob/master/api/v1/views/index.py), [api/v1/app.py](https://github.com/elyse502/AirBnB_clone_v3/blob/master/api/v1/app.py)
 It’s time to start your API!
@@ -552,6 +568,8 @@ Ok, let starts:
     * import `app_views` from `api.v1.views`
     * create a route `/status` on the object `app_views` that returns a JSON: `"status": "OK"` (see example)
 
+---
+
 ## 4. Some stats?: [api/v1/views/index.py](https://github.com/elyse502/AirBnB_clone_v3/blob/master/api/v1/views/index.py)
 Create an endpoint that retrieves the number of each objects by type:
 * In api/v1/views/index.py
@@ -571,13 +589,16 @@ guillaume@ubuntu:~/AirBnB_v3$
 ```
 _(No need to have a pretty rendered output, it’s a JSON, only the structure is important)_
 
+---
+
 ## 5. Not found: [api/v1/app.py](https://github.com/elyse502/AirBnB_clone_v3/blob/master/api/v1/app.py)
 Designers are really creative when they have to design a “404 page”, a “Not found”… [34 brilliantly designed 404 error pages](https://www.creativebloq.com/web-design/best-404-pages-812505)
 
 Today it’s different, because you won’t use HTML and CSS, but JSON!
 
 In `api/v1/app.py`, create a handler for `404` errors that returns a JSON-formatted `404` status code response. The content should be: `"error": "Not found"`
-```groovy
+
+```bash
 guillaume@ubuntu:~/AirBnB_v3$ curl -X GET http://0.0.0.0:5000/api/v1/nop
 {
   "error": "Not found"
@@ -603,6 +624,8 @@ guillaume@ubuntu:~/AirBnB_v3$ curl -X GET http://0.0.0.0:5000/api/v1/nop -vvv
 }
 guillaume@ubuntu:~/AirBnB_v3$
 ```
+
+---
 
 ## 6. State: [api/v1/views/states.py](https://github.com/elyse502/AirBnB_clone_v3/blob/master/api/v1/views/states.py), [api/v1/views/__init__.py](https://github.com/elyse502/AirBnB_clone_v3/blob/master/api/v1/views/__init__.py)
 Create a new view for `State` objects that handles all default RESTFul API actions:
@@ -632,7 +655,8 @@ Updates a `State` object: `PUT /api/v1/states/<state_id>`
 * Update the `State` object with all key-value pairs of the dictionary.
 * Ignore keys: `id`, `created_at` and `updated_at`
 * Returns the `State` object with the status code `200`
-```groovy
+
+```bash
 guillaume@ubuntu:~/AirBnB_v3$ curl -X GET http://0.0.0.0:5000/api/v1/states/
 [
   {
@@ -717,6 +741,8 @@ guillaume@ubuntu:~/AirBnB_v3$ curl -X GET http://0.0.0.0:5000/api/v1/states/fead
 guillaume@ubuntu:~/AirBnB_v3$
 ```
 
+---
+
 ## 7. City: [api/v1/views/cities.py](https://github.com/elyse502/AirBnB_clone_v3/blob/master/api/v1/views/cities.py), [api/v1/views/__init__.py](https://github.com/elyse502/AirBnB_clone_v3/blob/master/api/v1/views/__init__.py)
 Same as `State`, create a new view for `City` objects that handles all default RESTFul API actions:
 * In the file `api/v1/views/cities.py`
@@ -747,7 +773,8 @@ Updates a `City` object: `PUT /api/v1/cities/<city_id>`
 * Update the `City` object with all key-value pairs of the dictionary
 * Ignore keys: `id`, `state_id`, `created_at` and `updated_at`
 * Returns the `City` object with the status code `200`
-```groovy
+
+```bash
 guillaume@ubuntu:~/AirBnB_v3$ curl -X GET http://0.0.0.0:5000/api/v1/states/not_an_id/cities/
 {
   "error": "Not found"
@@ -851,6 +878,8 @@ guillaume@ubuntu:~/AirBnB_v3$ curl -X GET http://0.0.0.0:5000/api/v1/cities/b75a
 guillaume@ubuntu:~/AirBnB_v3$
 ```
 
+---
+
 ## 8. Amenity: [api/v1/views/amenities.py](https://github.com/elyse502/AirBnB_clone_v3/blob/master/api/v1/views/amenities.py), [api/v1/views/__init__.py](https://github.com/elyse502/AirBnB_clone_v3/blob/master/api/v1/views/__init__.py)
 Create a new view for `Amenity` objects that handles all default RESTFul API actions:
 * In the file `api/v1/views/amenities.py`
@@ -879,6 +908,8 @@ Updates a `Amenity` object: `PUT /api/v1/amenities/<amenity_id>`
 * Update the `Amenity` object with all key-value pairs of the dictionary
 * Ignore keys: `id`, `created_at` and `updated_at`
 * Returns the `Amenity` object with the status code `200`
+
+---
 
 ## 9. User: [api/v1/views/users.py](https://github.com/elyse502/AirBnB_clone_v3/blob/master/api/v1/views/users.py), [api/v1/views/__init__.py](https://github.com/elyse502/AirBnB_clone_v3/blob/master/api/v1/views/__init__.py)
 Create a new view for `User` object that handles all default RESTFul API actions:
@@ -909,6 +940,8 @@ Updates a `User` object: `PUT /api/v1/users/<user_id>`
 * Update the `User` object with all key-value pairs of the dictionary
 * Ignore keys: `id`, `email`, `created_at` and `updated_at`
 * Returns the `User` object with the status code `200`
+
+---
 
 ## 10. Place: [api/v1/views/places.py](https://github.com/elyse502/AirBnB_clone_v3/blob/master/api/v1/views/places.py), [api/v1/views/__init__.py](https://github.com/elyse502/AirBnB_clone_v3/blob/master/api/v1/views/__init__.py)
 Create a new view for `Place` objects that handles all default RESTFul API actions:
@@ -943,6 +976,8 @@ Updates a `Place` object: `PUT /api/v1/places/<place_id>`
 * Ignore keys: `id`, `user_id`, `city_id`, `created_at` and `updated_at`
 * Returns the `Place` object with the status code `200`
 
+---
+
 ## 11. Reviews: [api/v1/views/places_reviews.py](https://github.com/elyse502/AirBnB_clone_v3/blob/master/api/v1/views/places_reviews.py), [api/v1/views/__init__.py](https://github.com/elyse502/AirBnB_clone_v3/blob/master/api/v1/views/__init__.py)
 Create a new view for `Review` object that handles all default RESTFul API actions:
 * In the file `api/v1/views/places_reviews.py`
@@ -976,6 +1011,8 @@ Updates a `Review` object: `PUT /api/v1/reviews/<review_id>`
 * Ignore keys: `id`, `user_id`, `place_id`, `created_at` and `updated_at`
 * Returns the `Review` object with the status code `200`
 
+---
+
 ## 12. HTTP access control (CORS): [api/v1/app.py](https://github.com/elyse502/AirBnB_clone_v3/blob/master/api/v1/app.py)
 A resource makes a cross-origin HTTP request when it requests a resource from a different domain, or port, than the one the first resource itself serves.
 
@@ -994,7 +1031,7 @@ Update `api/v1/app.py` to create a `CORS` instance allowing: `/*` for `0.0.0.0`
 You will update it later when you will deploy your API to production.
 
 Now you can see this HTTP Response Header: `< Access-Control-Allow-Origin: 0.0.0.0`
-```groovy
+```bash
 guillaume@ubuntu:~/AirBnB_v3$ curl -X GET http://0.0.0.0:5000/api/v1/cities/1da255c0-f023-4779-8134-2b1b40f87683 -vvv
 *   Trying 0.0.0.0...
 * TCP_NODELAY set
@@ -1025,6 +1062,8 @@ guillaume@ubuntu:~/AirBnB_v3$ curl -X GET http://0.0.0.0:5000/api/v1/cities/1da2
 guillaume@ubuntu:~/AirBnB_v3$
 ```
 
+---
+
 ## 13. Place - Amenity: [api/v1/views/places_amenities.py](https://github.com/elyse502/AirBnB_clone_v3/blob/master/api/v1/views/places_amenities.py), [api/v1/views/__init__.py](https://github.com/elyse502/AirBnB_clone_v3/blob/master/api/v1/views/__init__.py)
 Create a new view for the link between `Place` objects and `Amenity` objects that handles all default RESTFul API actions:
 * In the file `api/v1/views/places_amenities.py`
@@ -1050,6 +1089,8 @@ Link a `Amenity` object to a `Place`: `POST /api/v1/places/<place_id>/amenities/
 * If the `Amenity` is already linked to the `Place`, return the `Amenity` with the status code `200`
 * Returns the `Amenity` with the status code `201`
 
+---
+
 ## 14. Security improvements!: [models/base_model.py](https://github.com/elyse502/AirBnB_clone_v3/blob/master/models/base_model.py), [models/user.py](https://github.com/elyse502/AirBnB_clone_v3/blob/master/models/user.py)
 Currently, the `User` object is designed to store the user password in cleartext.
 
@@ -1060,6 +1101,8 @@ To avoid that, improve the `User` object:
 * Each time a new `User` object is created or password updated, the password is hashed to a [MD5](https://docs.python.org/3.4/library/hashlib.html) value
 * In the database for `DBStorage`, the password stored is now hashed to a MD5 value
 * In the file for `FileStorage`, the password stored is now hashed to a MD5 value
+
+---
 
 ## 15. Search: [api/v1/views/places.py](https://github.com/elyse502/AirBnB_clone_v3/blob/master/api/v1/views/places.py)
 For the moment, the only way to list `Place` objects is via `GET /api/v1/cities/<city_id>/places`.
@@ -1130,12 +1173,6 @@ guillaume@ubuntu:~/AirBnB_v3$ curl -X POST http://0.0.0.0:5000/api/v1/places_sea
 ...
 guillaume@ubuntu:~/AirBnB_v3$
 ```
-
-
-
-
-
-
 
 
 
